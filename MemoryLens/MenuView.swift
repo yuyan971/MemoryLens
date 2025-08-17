@@ -10,7 +10,7 @@ import Cocoa  // NSWorkspace用
 import Darwin  // proc_pidinfo用
 
 struct MenuView: View {
-    @State var btnTxt = "Button"
+//    @State var btnTxt = "Button"
     @State var memoryInfo = "計測中..."
     
     
@@ -22,13 +22,13 @@ struct MenuView: View {
             
             Divider()
             
-            Button(action: {
-                updateTxt()
-                btnTxt = "更新しました!"
-            }) {
-                Text(btnTxt)
-            }
-            .padding(.horizontal)
+//            Button(action: {
+//                updateTxt()
+//                btnTxt = "更新しました!"
+//            }) {
+//                Text(btnTxt)
+//            }
+//            .padding(.horizontal)
             
             Button(action: {
                 NSApplication.shared.terminate(nil)
@@ -47,11 +47,15 @@ struct MenuView: View {
     func updateTxt() {
         if let activeApp = NSWorkspace.shared.frontmostApplication {
             let appName = activeApp.localizedName ?? "Unknown"
+            //let selfName = "MemoryLens"
             let pid = activeApp.processIdentifier
+            let selfPid = getpid()
             let memory = getMemoryUsage(for: pid)
+            let selfMemory = (getMemoryUsage(for: selfPid))
             let swapUsed = getSwapUsed()
             let swapMB = Double(swapUsed.xsu_used) / 1024.0 / 1024.0 / 1024.0
-            memoryInfo = "\(appName)\n\(memory)\nSwapped: \(swapMB)"
+            memoryInfo = "\(appName)\n\(memory)\nSwapped: \(swapMB)\nself\n\(selfMemory)"
+            print("===\nselfMemory:\n\(selfMemory)")
             print(memoryInfo)
         }
     }
@@ -72,6 +76,7 @@ struct MenuView: View {
         return "N/A"
     }
     
+    
     // スワップ使用量を取得 // 参考文献：https://qiita.com/Kyome/items/01cce674f7c9d9092a14
     func getSwapUsed() -> xsw_usage {
         var query = [CTL_VM, VM_SWAPUSAGE]
@@ -80,7 +85,7 @@ struct MenuView: View {
         let r = sysctl(&query, CUnsignedInt(query.count), &result, &resultSize, nil, 0)
         precondition(r == 0)
         precondition(resultSize == MemoryLayout<xsw_usage>.size)
-        print(result)
+        //print(result)
         return result
     }
 }
