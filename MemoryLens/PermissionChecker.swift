@@ -12,7 +12,6 @@ class PermissionChecker {
     
     // 権限チェック（他プロセスの情報が取得できるか確認）
     static func checkMemoryAccessPermission() -> Bool {
-        print(2)
         // Finderなど、常に存在するプロセスでテスト
         let testPIDs = [
             1,     // launchd（システムプロセス）
@@ -41,8 +40,9 @@ class PermissionChecker {
         //if !hasCheckedPermission
         //{
         UserDefaults.standard.set(true, forKey: "HasCheckedMemoryPermission")
+        //print(checkMemoryAccessPermission())
         if !checkMemoryAccessPermission() {
-            showPermissionDialog()
+            //showPermissionDialog()  // フルディスクアクセス関係なかったので，コメントアウト
         }
         //}
     }

@@ -54,7 +54,12 @@ struct MenuView: View {
             let selfMemory = (getMemoryFootprint(for: selfPid))
             let swapUsed = getSwapUsed()
             let swapMB = Double(swapUsed.xsu_used) / 1024.0 / 1024.0 / 1024.0
-            memoryInfo = "\(appName)\n\(memory)\nSwapped: \(swapMB)\nself\n\(selfMemory)"
+            memoryInfo =
+            "\(appName)\n"
+            + "\(memory)\n"
+            + "swapped: \(swapMB) GB\n"
+            + "\n"
+            + "(self >> \(selfMemory))"
             print("===\nselfMemory:\n\(selfMemory)")
             print(memoryInfo)
         }

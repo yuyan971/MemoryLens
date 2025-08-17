@@ -25,7 +25,6 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         PermissionChecker.requestPermissionIfNeeded()
-        print(1)
     }
 }
 //    var statusItem: NSStatusItem?
