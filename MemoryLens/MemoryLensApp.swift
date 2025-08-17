@@ -13,7 +13,7 @@ struct MemoryLensApp: App {
         MenuBarExtra("Sample", systemImage: "circle.fill"){
             MenuView()
         }
-        //.menuBarExtraStyle(.window)
+        .menuBarExtraStyle(.window)
         
     }
 }
