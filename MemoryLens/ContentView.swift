@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  MemoryLens
 //
-//  Created by 石松優弥 on 2025/08/17.
+//  Created by matt-u on 2025/08/17.
 //
 
 import SwiftUI
