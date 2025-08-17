@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct MemoryLensApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var delegate // これを書くことで，Awake()的なのものが使えるように．>> https://nulab.com/ja/blog/nulab/how-to-make-statusbar-app-with-swiftui/
     var body: some Scene {
         MenuBarExtra("Sample", systemImage: "circle.fill"){
             MenuView()
